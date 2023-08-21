@@ -5,8 +5,8 @@ import DepartmentHierarchy from './DepartmentHierarchy';
 const SecondPage: React.FC = () => {
     return (
         <div>
-         <DataGridComponent  />
-            <DepartmentHierarchy/>
+            <DataGridComponent />
+            <DepartmentHierarchy />
         </div>
     );
 };

@@ -62,19 +62,31 @@ const DepartmentHierarchy: React.FC = () => {
 
   const handleDepartmentToggle = (id: number) => {
     setSelectedDepartments((prevSelected) => {
-        const department = hierarchicalData.find((dept) => dept.id === id);
-        let updatedSelected: number[];
-  
-        if (isAllSubDepartmentsSelected(department!)) {
-          updatedSelected = prevSelected.filter((itemId) => itemId !== id);
-        } else {
-          updatedSelected = Array.from(
-            new Set([...prevSelected, id, ...(department!.subDepartments || []).map(subDept => subDept.id)])
-          );
-        }
-  
-        return updatedSelected;
-      });
+      const department = hierarchicalData.find((dept) => dept.id === id);
+      let updatedSelected: number[];
+
+      if (isDepartmentSelected(department!)) {
+        // Uncheck the department and all its sub-departments
+        updatedSelected = prevSelected.filter((itemId) => itemId !== id);
+        updatedSelected = updatedSelected.filter((itemId) =>
+          department!.subDepartments?.every(
+            (subDept) => subDept.id !== itemId
+          )
+        );
+      } else {
+        // Check the department and all its sub-departments
+        updatedSelected = Array.from(
+          new Set([
+            ...prevSelected,
+            id,
+            ...(department!.subDepartments || []).map(
+              (subDept) => subDept.id
+            ),
+          ])
+        );
+      }
+      return updatedSelected;
+    });
   };
 
   const handleSubDepartmentToggle = (id: number, parentId: number) => {
@@ -110,6 +122,7 @@ const DepartmentHierarchy: React.FC = () => {
   };
 
   return (
+    <div style={{ width: '100%',margin:'10em'}}>
     <List>
       {" "}
       {hierarchicalData.map((department) => (
@@ -160,6 +173,7 @@ const DepartmentHierarchy: React.FC = () => {
         </React.Fragment>
       ))}{" "}
     </List>
+    </div>
   );
 };
 

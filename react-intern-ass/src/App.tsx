@@ -5,10 +5,12 @@ import SecondPage from './components/SecondPage';
 const App: React.FC = () => {
   return (
     <>
-      <Routes>
-        <Route path="/" element={<UserDetailsForm />} />
-        <Route path="/second" element={<SecondPage/>} />
-      </Routes>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
+        <Routes>
+          <Route path="/" element={<UserDetailsForm />} />
+          <Route path="/second" element={<SecondPage />} />
+        </Routes>
+      </div>
     </>
   );
 };

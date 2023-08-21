@@ -25,7 +25,7 @@ const DataGridComponent: React.FC = () => {
     ];
 
     return (
-        <div style={{ height: 400, width: '100%' }}>
+        <div style={{ height: 400, width: '100%',margin:'10em',marginTop:'20em' }}>
             <DataGrid rows={data}
                 columns={columns}
                 initialState={{
